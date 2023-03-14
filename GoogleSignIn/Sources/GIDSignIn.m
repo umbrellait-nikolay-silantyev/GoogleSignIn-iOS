@@ -567,6 +567,9 @@ static const NSTimeInterval kMinimumRestoredAccessTokenTimeToExpire = 600.0;
 #endif // TARGET_OS_MACCATALYST || TARGET_OS_OSX
 
   NSMutableDictionary<NSString *, NSString *> *additionalParameters = [@{} mutableCopy];
+  if(![self isFreshInstall]){
+    additionalParameters[@"prompt"] = @"select_account";
+  }
   additionalParameters[kIncludeGrantedScopesParameter] = @"true";
   if (options.configuration.serverClientID) {
     additionalParameters[kAudienceParameter] = options.configuration.serverClientID;
